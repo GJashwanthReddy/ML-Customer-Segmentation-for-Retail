@@ -1,0 +1,6 @@
+{
+  "python.defaultInterpreterPath": "C:\\Users\\G Jashwanth Reddy\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+  "python.terminal.activateEnvironment": true,
+  "files.autoSave": "afterDelay",
+  "python-envs.defaultEnvManager": "ms-python.python:system"
+}

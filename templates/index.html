@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Intelligence — Retail Analytics Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css?v=1.1">
+  <!-- Plotly.js for fast, interactive, client-side charts -->
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+</head>
+<body>
+
+  <!-- Top Real Website Navigation Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-brand" onclick="navigateTo('overview')">
+        <span class="brand-badge">CI</span>
+        <div class="brand-text">
+          <span class="brand-title">CUSTOMER INTELLIGENCE</span>
+          <span class="brand-sub">Retail Analytics Platform</span>
+        </div>
+      </div>
+
+      <nav class="header-nav">
+        <a href="#overview" class="nav-link active" data-page="overview">Home</a>
+        <a href="#customers" class="nav-link" data-page="customers">Customers</a>
+        <a href="#segments" class="nav-link" data-page="segments">Segments</a>
+        <a href="#analytics" class="nav-link" data-page="analytics">Analytics</a>
+        <a href="#data" class="nav-link" data-page="data">Data</a>
+      </nav>
+
+      <div class="header-actions">
+        <span class="status-indicator">
+          <span class="status-dot"></span>
+          <span id="header-dataset-label">Online Retail</span>
+        </span>
+        <button class="btn btn-secondary btn-sm" onclick="navigateTo('data')">Upload Data</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Website Content Area -->
+  <main class="main-content">
+
+    <!-- ========================================================= -->
+    <!-- 1. HOME / OVERVIEW PAGE -->
+    <!-- ========================================================= -->
+    <section id="page-overview" class="page-view active">
+      
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="hero-content">
+          <span class="eyebrow-tag">CUSTOMER INTELLIGENCE PLATFORM</span>
+          <h1 class="hero-headline">Understand your customers.<br>Grow your business.</h1>
+          <p class="hero-subtext">
+            Turn retail transaction data into actionable customer insights using behavioral analytics and machine learning.
+          </p>
+          <div class="hero-cta-group">
+            <button class="btn btn-primary" onclick="navigateTo('customers')">Explore Customers</button>
+            <button class="btn btn-secondary" onclick="navigateTo('segments')">Explore Segments</button>
+          </div>
+        </div>
+
+        <div class="hero-visual-wrapper">
+          <div class="hero-visual-card">
+            <div class="flow-step">
+              <div class="step-num-badge">1</div>
+              <div class="step-details">
+                <div class="step-title">Retail Transactions</div>
+                <div class="step-desc">Invoice history & purchase frequency</div>
+              </div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+              <div class="step-num-badge">2</div>
+              <div class="step-details">
+                <div class="step-title">RFM Intelligence Engine</div>
+                <div class="step-desc">Recency, Frequency, Monetary valuation</div>
+              </div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step flow-step-active">
+              <div class="step-num-badge step-num-active">3</div>
+              <div class="step-details">
+                <div class="step-title">Actionable Customer Personas</div>
+                <div class="step-desc">Targeted retention, upsell & loyalty cohorts</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trusted Data Metric Strip -->
+      <section class="trusted-data-strip">
+        <div class="trusted-metric-item">
+          <span class="metric-label">TRUSTED DATA</span>
+          <span class="metric-val" id="kpi-customers">4,338</span>
+          <span class="metric-sub">Active shoppers</span>
+        </div>
+        <div class="trusted-metric-item">
+          <span class="metric-label">TRANSACTIONS</span>
+          <span class="metric-val" id="kpi-transactions">392,692</span>
+          <span class="metric-sub">Verified orders</span>
+        </div>
+        <div class="trusted-metric-item">
+          <span class="metric-label">REVENUE</span>
+          <span class="metric-val" id="kpi-revenue">£8.89M</span>
+          <span class="metric-sub">Gross volume</span>
+        </div>
+        <div class="trusted-metric-item">
+          <span class="metric-label">CUSTOMER SEGMENTS</span>
+          <span class="metric-val" id="kpi-segments">6</span>
+          <span class="metric-sub" id="kpi-silhouette">Silhouette 0.312</span>
+        </div>
+      </section>
+
+      <!-- How It Works Section -->
+      <section class="section-block">
+        <div class="section-header">
+          <span class="eyebrow-tag">PROCESS</span>
+          <h2 class="section-heading">How it works</h2>
+        </div>
+        <div class="grid-3-col">
+          <div class="step-card">
+            <span class="step-index">01</span>
+            <h3 class="step-name">Transaction Data</h3>
+            <p class="step-text">Ingests raw invoice records, cleans cancellations and duplicates, and standardizes item values.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-index">02</span>
+            <h3 class="step-name">RFM Intelligence</h3>
+            <p class="step-text">Calculates purchase Recency, Frequency, and Monetary spend to build individual shopper profiles.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-index">03</span>
+            <h3 class="step-name">Customer Segmentation</h3>
+            <p class="step-text">Applies K-Means clustering and PCA validation to group customers into commercially distinct personas.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Customer Segmentation -->
+      <section class="section-block callout-block">
+        <div class="callout-inner">
+          <span class="eyebrow-tag">STRATEGY</span>
+          <h2 class="section-heading">Why customer segmentation?</h2>
+          <p class="callout-text">
+            Different customers demonstrate distinct shopping habits. Treating all customers identically leads to inefficient marketing and defection. By grouping shoppers according to actual purchasing behavior, retailers can tailor re-engagement campaigns, maximize customer lifetime value, and protect revenue.
+          </p>
+        </div>
+      </section>
+
+      <!-- Customer Segments Preview -->
+      <section class="section-block">
+        <div class="section-header flex-between">
+          <div>
+            <span class="eyebrow-tag">COHORT BREAKDOWN</span>
+            <h2 class="section-heading">Customer Segments</h2>
+            <p class="section-desc">Key behavioral groups identified from transactional purchasing history.</p>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="navigateTo('segments')">View All Segments →</button>
+        </div>
+        <div id="overview-segment-preview-list" class="segment-preview-grid">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </section>
+
+      <!-- Business Insight Callout -->
+      <section class="section-block">
+        <div class="insight-banner">
+          <span class="insight-tag">INSIGHT OF THE DAY</span>
+          <p class="insight-text" id="overview-insight-text">
+            Loading dynamic commercial insights...
+          </p>
+        </div>
+      </section>
+
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 2. CUSTOMERS PAGE -->
+    <!-- ========================================================= -->
+    <section id="page-customers" class="page-view">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Customers</h1>
+          <p class="page-subtitle">Explore customer behavior, lookup profiles, and inspect segment membership.</p>
+        </div>
+        <button class="btn btn-secondary" onclick="exportCustomerCSV()">Download CSV</button>
+      </div>
+
+      <!-- Customer Lookup Area -->
+      <div class="customer-search-panel">
+        <div class="search-input-group">
+          <label class="input-label" for="cust-search-input">Search Customer ID:</label>
+          <div class="search-box-row">
+            <input type="text" id="cust-search-input" class="text-input" placeholder="Enter Customer ID (e.g. 17850)" value="17850">
+            <button class="btn btn-primary" onclick="lookupCustomer()">Search</button>
+          </div>
+        </div>
+
+        <div class="sample-chips-group">
+          <span class="chips-label">Quick Sample Customers:</span>
+          <div class="chips-list">
+            <button class="chip-btn" onclick="selectSampleCustomer(17850)">#17850</button>
+            <button class="chip-btn" onclick="selectSampleCustomer(14646)">#14646</button>
+            <button class="chip-btn" onclick="selectSampleCustomer(12346)">#12346</button>
+            <button class="chip-btn" onclick="selectSampleCustomer(14911)">#14911</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Selected Customer Profile Card -->
+      <div id="customer-profile-card" class="crm-profile-card">
+        <div class="crm-profile-header">
+          <div>
+            <span class="crm-label">CUSTOMER PROFILE</span>
+            <h2 id="crm-id-title" class="crm-title">Customer #17850</h2>
+          </div>
+          <span id="crm-segment-badge" class="crm-badge">Cluster C5 • Loyal High-Value Customers</span>
+        </div>
+
+        <div class="crm-metrics-strip">
+          <div class="crm-metric-box">
+            <span class="crm-metric-label">RECENCY</span>
+            <span id="crm-recency-val" class="crm-metric-value">372 days</span>
+          </div>
+          <div class="crm-metric-box">
+            <span class="crm-metric-label">FREQUENCY</span>
+            <span id="crm-frequency-val" class="crm-metric-value">34 orders</span>
+          </div>
+          <div class="crm-metric-box">
+            <span class="crm-metric-label">MONETARY SPEND</span>
+            <span id="crm-monetary-val" class="crm-metric-value">£5,391.21</span>
+          </div>
+        </div>
+
+        <div class="crm-text-section">
+          <div class="crm-text-title">CUSTOMER BEHAVIOR</div>
+          <p id="crm-behavior-text" class="crm-text-body">Consistent regular shoppers with dependable repeat purchases and above-average spending.</p>
+        </div>
+
+        <div class="crm-text-section">
+          <div class="crm-text-title">RECOMMENDED ACTION</div>
+          <p id="crm-action-text" class="crm-text-body bold-text">Upsell premium bundles and loyalty rewards.</p>
+        </div>
+      </div>
+
+      <!-- Customer Directory Table with Filters -->
+      <div class="directory-section">
+        <div class="directory-header">
+          <h2 class="section-heading">Customer Directory</h2>
+          <span id="directory-record-count" class="record-count">Showing customers</span>
+        </div>
+
+        <div class="directory-filters-bar">
+          <div class="filter-item">
+            <label class="filter-label" for="filter-segment">Segment Filter:</label>
+            <select id="filter-segment" class="select-input" onchange="fetchCustomers(1)">
+              <option value="All">All Segments</option>
+            </select>
+          </div>
+
+          <div class="filter-item">
+            <label class="filter-label" for="filter-monetary">Min Spend (£):</label>
+            <input type="number" id="filter-monetary" class="text-input filter-num" value="0" step="50" onchange="fetchCustomers(1)">
+          </div>
+
+          <div class="filter-item">
+            <label class="filter-label" for="filter-recency-slider">Max Recency (days): <span id="recency-val-label">373</span></label>
+            <input type="range" id="filter-recency-slider" min="0" max="373" value="373" class="slider-input" oninput="updateRecencySlider(this.value)" onchange="fetchCustomers(1)">
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Customer ID</th>
+                <th>Segment</th>
+                <th>Cluster</th>
+                <th>Recency (days)</th>
+                <th>Frequency (orders)</th>
+                <th>Monetary (£)</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="customers-table-body">
+              <!-- Populated via JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pagination-bar">
+          <button id="btn-prev-page" class="btn btn-secondary btn-sm" onclick="changeCustomerPage(-1)">Previous</button>
+          <span id="pagination-info" class="page-info">Page 1 of 1</span>
+          <button id="btn-next-page" class="btn btn-secondary btn-sm" onclick="changeCustomerPage(1)">Next</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 3. SEGMENTS PAGE -->
+    <!-- ========================================================= -->
+    <section id="page-segments" class="page-view">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Customer Segments</h1>
+          <p class="page-subtitle">Understand the distinct behavioral cohorts identified from retail purchasing patterns.</p>
+        </div>
+      </div>
+
+      <!-- Segment Profile Cards Grid -->
+      <div id="segments-grid" class="segments-card-grid">
+        <!-- Rendered dynamically via JS -->
+      </div>
+
+      <!-- Interactive Benchmark Comparison Tool -->
+      <div class="benchmark-panel">
+        <div class="benchmark-header">
+          <div>
+            <h2 class="section-heading">Segment Benchmark Comparison</h2>
+            <p class="section-desc">Compare an individual customer segment against the retail store average baseline (1.0x).</p>
+          </div>
+          <div class="benchmark-selector">
+            <label class="input-label" for="benchmark-cluster-select">Select Segment:</label>
+            <select id="benchmark-cluster-select" class="select-input" onchange="renderBenchmarkChart()">
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+        </div>
+
+        <div class="benchmark-grid">
+          <div id="benchmark-summary-card" class="benchmark-summary-box">
+            <!-- Details rendered dynamically -->
+          </div>
+          <div id="chart-benchmark" class="benchmark-chart-box">
+            <!-- Plotly.js chart -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 4. ANALYTICS PAGE (DEDICATED ML WORKSPACE) -->
+    <!-- ========================================================= -->
+    <section id="page-analytics" class="page-view">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Machine Learning Analytics</h1>
+          <p class="page-subtitle">Unsupervised machine learning pipeline, clustering diagnostics, and mathematical evaluation.</p>
+        </div>
+      </div>
+
+      <!-- Clean Secondary Sub-Navigation -->
+      <div class="subnav-bar">
+        <button class="subnav-link active" data-sub="overview" onclick="switchAnalyticsSub('overview')">Overview</button>
+        <button class="subnav-link" data-sub="rfm" onclick="switchAnalyticsSub('rfm')">RFM Analysis</button>
+        <button class="subnav-link" data-sub="clustering" onclick="switchAnalyticsSub('clustering')">Clustering Evaluation</button>
+        <button class="subnav-link" data-sub="comparison" onclick="switchAnalyticsSub('comparison')">Hierarchical Comparison</button>
+        <button class="subnav-link" data-sub="pca" onclick="switchAnalyticsSub('pca')">PCA Visualization</button>
+      </div>
+
+      <!-- Sub-view 1: Overview -->
+      <div id="analytics-sub-overview" class="analytics-sub-view active">
+        <div class="card-panel">
+          <h2 class="section-heading">Machine Learning Pipeline Architecture</h2>
+          <p class="section-desc">End-to-end unsupervised learning flow from transactional logs to business personas.</p>
+          
+          <div class="pipeline-flow-row">
+            <div class="pipeline-node">
+              <span class="p-num">1</span>
+              <div class="p-title">Transactions</div>
+              <div class="p-desc">Clean Invoices</div>
+            </div>
+            <div class="p-arrow">→</div>
+            <div class="pipeline-node">
+              <span class="p-num">2</span>
+              <div class="p-title">RFM Engine</div>
+              <div class="p-desc">R, F, M Features</div>
+            </div>
+            <div class="p-arrow">→</div>
+            <div class="pipeline-node">
+              <span class="p-num">3</span>
+              <div class="p-title">Feature Scaling</div>
+              <div class="p-desc">StandardScaler</div>
+            </div>
+            <div class="p-arrow">→</div>
+            <div class="pipeline-node">
+              <span class="p-num">4</span>
+              <div class="p-title">K-Means</div>
+              <div class="p-desc">k-means++ (K=6)</div>
+            </div>
+            <div class="p-arrow">→</div>
+            <div class="pipeline-node">
+              <span class="p-num">5</span>
+              <div class="p-title">Evaluation</div>
+              <div class="p-desc">Elbow & Silhouette</div>
+            </div>
+            <div class="p-arrow">→</div>
+            <div class="pipeline-node p-node-active">
+              <span class="p-num">6</span>
+              <div class="p-title">Customer Personas</div>
+              <div class="p-desc">Commercial Action</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-4-col">
+          <div class="stat-box">
+            <span class="stat-label">Features Used</span>
+            <span class="stat-val">Recency, Frequency, Spend</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Primary Algorithm</span>
+            <span class="stat-val">K-Means Clustering</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Selected Clusters (K)</span>
+            <span class="stat-val">6</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Silhouette Score</span>
+            <span class="stat-val" id="an-sil-score">0.312</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sub-view 2: RFM Analysis -->
+      <div id="analytics-sub-rfm" class="analytics-sub-view">
+        <h2 class="section-heading">RFM Feature Distributions</h2>
+        <p class="section-desc">Interactive distributions and density spreads across the three extracted behavioral dimensions.</p>
+
+        <div class="grid-3-col">
+          <div id="chart-rfm-recency" class="chart-box"></div>
+          <div id="chart-rfm-frequency" class="chart-box"></div>
+          <div id="chart-rfm-monetary" class="chart-box"></div>
+        </div>
+
+        <div class="grid-2-col" style="margin-top: 1.5rem;">
+          <div class="card-panel">
+            <h3 class="subsection-heading">RFM Descriptive Statistics & Skewness</h3>
+            <div class="table-container">
+              <table id="rfm-stats-table" class="data-table">
+                <thead>
+                  <tr>
+                    <th>Metric</th>
+                    <th>Mean</th>
+                    <th>Std</th>
+                    <th>Median</th>
+                    <th>Min</th>
+                    <th>Max</th>
+                    <th>Skewness</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card-panel">
+            <h3 class="subsection-heading">Pearson Correlation Matrix</h3>
+            <div id="chart-rfm-corr" class="chart-box"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sub-view 3: Clustering Evaluation -->
+      <div id="analytics-sub-clustering" class="analytics-sub-view">
+        <h2 class="section-heading">Find the Optimal Number of Customer Segments</h2>
+        <p class="section-desc">Evaluating within-cluster sum of squares (Elbow Method) and cluster cohesion vs. separation (Silhouette Analysis) for K = 2 to 8.</p>
+
+        <div class="grid-2-col">
+          <div id="chart-elbow" class="chart-box"></div>
+          <div id="chart-silhouette" class="chart-box"></div>
+        </div>
+
+        <div class="card-panel" style="margin-top: 1.5rem;">
+          <div class="highlight-callout">
+            <span class="callout-tag">SELECTED K = 6</span>
+            <p class="callout-body">Selected based on clustering evaluation across K = 2 to 8, balancing the reduction in inertia (Elbow inflection) with silhouette separation. Active Silhouette Score: <strong>0.312</strong>.</p>
+          </div>
+
+          <h3 class="subsection-heading" style="margin-top: 1.25rem;">Evaluation Table (K = 2 through 8)</h3>
+          <div class="table-container">
+            <table id="cluster-eval-table" class="data-table">
+              <thead>
+                <tr>
+                  <th>K</th>
+                  <th>Inertia (WCSS)</th>
+                  <th>Silhouette Score</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card-panel" style="margin-top: 1.5rem;">
+          <h2 class="section-heading">K-Means Customer Distribution</h2>
+          <div id="chart-kmeans-volume" class="chart-box"></div>
+        </div>
+      </div>
+
+      <!-- Sub-view 4: Hierarchical Comparison -->
+      <div id="analytics-sub-comparison" class="analytics-sub-view">
+        <h2 class="section-heading">K-Means vs. Hierarchical Clustering</h2>
+        <p class="section-desc">Benchmarking K-Means against Agglomerative Hierarchical Clustering using Ward linkage.</p>
+
+        <div id="chart-hierarchical-comp" class="chart-box"></div>
+
+        <div class="grid-2-col" style="margin-top: 1.5rem;">
+          <div class="card-panel">
+            <h3 class="subsection-heading">Validation Metric Benchmark</h3>
+            <div class="table-container">
+              <table id="hierarchical-metrics-table" class="data-table">
+                <thead>
+                  <tr>
+                    <th>Algorithm</th>
+                    <th>Silhouette Score</th>
+                    <th>Davies-Bouldin Index</th>
+                    <th>Calinski-Harabasz</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card-panel">
+            <h3 class="subsection-heading">Assignment Cross-Tabulation Matrix</h3>
+            <div class="table-container">
+              <table id="cross-tab-table" class="data-table">
+                <thead><tr></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-panel highlight-callout" style="margin-top: 1.5rem;">
+          <span class="callout-tag">ALGORITHMIC DECISION</span>
+          <p class="callout-body">K-Means achieves a competitive Silhouette Score while operating in O(N · K · I) time complexity compared to O(N³) for Agglomerative Hierarchical clustering, making it the production model choice for retail customer datasets.</p>
+        </div>
+      </div>
+
+      <!-- Sub-view 5: PCA Visualization -->
+      <div id="analytics-sub-pca" class="analytics-sub-view">
+        <div class="page-header" style="margin-bottom: 0.75rem;">
+          <div>
+            <h2 class="section-heading">Customer Segments in 2D (PCA)</h2>
+            <p class="section-desc">Principal Component Analysis projects the 3D RFM space onto two orthogonal principal components for visual inspection.</p>
+          </div>
+        </div>
+
+        <div class="pca-layout-grid">
+          <div id="chart-pca-scatter" class="chart-box pca-chart-height"></div>
+          
+          <div class="card-panel pca-side-panel">
+            <h3 class="subsection-heading">Explained Variance</h3>
+            <div class="stat-box" style="margin-bottom: 0.75rem;">
+              <span class="stat-label">PC1 Variance</span>
+              <span id="pca-var-pc1" class="stat-val">50.8%</span>
+              <span class="stat-sub">Spending & order volume</span>
+            </div>
+            <div class="stat-box" style="margin-bottom: 0.75rem;">
+              <span class="stat-label">PC2 Variance</span>
+              <span id="pca-var-pc2" class="stat-val">28.4%</span>
+              <span class="stat-sub">Purchase recency & timing</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Total Retained</span>
+              <span id="pca-var-total" class="stat-val">79.2%</span>
+              <span class="stat-sub">Combined 2D information</span>
+            </div>
+
+            <div class="highlight-callout" style="margin-top: 1rem;">
+              <span class="callout-tag">CLUSTER COHESION</span>
+              <p class="callout-body">Distinct visual boundaries confirm that behavioral segments represent genuine customer groupings rather than arbitrary mathematical slices.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 5. DATA PAGE -->
+    <!-- ========================================================= -->
+    <section id="page-data" class="page-view">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Data Management</h1>
+          <p class="page-subtitle">Inspect active transaction records, audit data hygiene stages, or upload a custom retail dataset.</p>
+        </div>
+      </div>
+
+      <div class="trusted-data-strip" style="margin-bottom: 1.5rem;">
+        <div class="trusted-metric-item">
+          <span class="metric-label">RAW RECORDS</span>
+          <span class="metric-val" id="data-raw-rows">541,909</span>
+          <span class="metric-sub">Original database rows</span>
+        </div>
+        <div class="trusted-metric-item">
+          <span class="metric-label">CLEAN RECORDS</span>
+          <span class="metric-val" id="data-clean-rows">392,692</span>
+          <span class="metric-sub" id="data-retention-rate">72.5% retained</span>
+        </div>
+        <div class="trusted-metric-item">
+          <span class="metric-label">UNIQUE CUSTOMERS</span>
+          <span class="metric-val" id="data-unique-customers">4,338</span>
+          <span class="metric-sub">Account holders</span>
+        </div>
+        <div class="trusted-metric-item">
+          <span class="metric-label">TRANSACTIONS</span>
+          <span class="metric-val" id="data-unique-invoices">18,532</span>
+          <span class="metric-sub">Distinct orders</span>
+        </div>
+      </div>
+
+      <!-- Upload Custom Dataset Card -->
+      <div class="card-panel" style="margin-bottom: 1.75rem;">
+        <h2 class="section-heading">Upload Custom Retail Dataset</h2>
+        <p class="section-desc">Upload a transactional retail dataset in CSV or XLSX format to re-run the full segmentation pipeline.</p>
+        
+        <div class="upload-dropzone">
+          <input type="file" id="dataset-file-input" accept=".csv,.xlsx" style="display: none;" onchange="handleFileSelect(this)">
+          <div class="dropzone-content" onclick="document.getElementById('dataset-file-input').click()">
+            <span class="upload-icon-symbol">📁</span>
+            <div class="upload-title">Choose CSV or XLSX File</div>
+            <div class="upload-hint">Requires: InvoiceNo, StockCode, Quantity, InvoiceDate, UnitPrice, CustomerID</div>
+          </div>
+          <div id="upload-status-msg" class="upload-status"></div>
+        </div>
+      </div>
+
+      <!-- Data Quality Hygiene Audit Trail -->
+      <div class="card-panel" style="margin-bottom: 1.75rem;">
+        <h2 class="section-heading">Data Quality Hygiene Audit Trail</h2>
+        <p class="section-desc">Record filtering pipeline stages applied during transaction sanitization.</p>
+        <div class="table-container">
+          <table id="audit-trail-table" class="data-table">
+            <thead>
+              <tr>
+                <th>Pipeline Stage</th>
+                <th>Record Count</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Clean Data Preview -->
+      <div class="card-panel" style="margin-bottom: 1.75rem;">
+        <h2 class="section-heading">Clean Transaction Preview</h2>
+        <p class="section-desc">First 15 sanitized transaction records active in memory.</p>
+        <div class="table-container">
+          <table id="data-preview-table" class="data-table">
+            <thead>
+              <tr>
+                <th>InvoiceNo</th>
+                <th>StockCode</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>InvoiceDate</th>
+                <th>UnitPrice</th>
+                <th>TotalPrice</th>
+                <th>CustomerID</th>
+                <th>Country</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Numerical Column Statistics -->
+      <div class="card-panel">
+        <h2 class="section-heading">Numerical Column Statistics</h2>
+        <p class="section-desc">Descriptive statistical metrics across cleaned numerical columns.</p>
+        <div class="table-container">
+          <table id="numeric-stats-table" class="data-table">
+            <thead>
+              <tr>
+                <th>Column</th>
+                <th>Count</th>
+                <th>Mean</th>
+                <th>Std</th>
+                <th>Min</th>
+                <th>25%</th>
+                <th>50%</th>
+                <th>75%</th>
+                <th>Max</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <span class="footer-brand">CUSTOMER INTELLIGENCE</span>
+        <span class="footer-sub">Retail Analytics Platform • Powered by Python Machine Learning</span>
+      </div>
+      <div class="footer-right">
+        <span>RFM Analysis · K-Means · Hierarchical · PCA</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Logic -->
+  <script src="/static/js/app.js?v=1.1"></script>
+</body>
+</html>

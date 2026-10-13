@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Customer Intelligence Web App (Recommended)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/server.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Launch Streamlit App (Legacy)",
+      "type": "debugpy",
+      "request": "launch",
+      "python": "C:\\Users\\G Jashwanth Reddy\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "module": "streamlit",
+      "args": [
+        "run",
+        "${workspaceFolder}/app.py"
+      ],
+      "jinja": true,
+      "justMyCode": true
+    }
+  ]
+}
