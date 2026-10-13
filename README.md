@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Customer Segmentation for Retail
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -212,3 +213,6 @@ When presenting to faculty reviewers:
 
 ## 10. Contributors
 * **B.Tech Minor Project Team** | Department of Computer Science & Engineering / AI & ML
+=======
+# ML-Smart-Loan-Approval-Risk-Analysis-System
+>>>>>>> 9a687ecf1263b113e76fc3256e8f4be472accda4
